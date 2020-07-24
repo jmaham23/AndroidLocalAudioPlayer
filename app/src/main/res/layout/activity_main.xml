@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.material.tabs.TabLayout
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="100dp"
+        app:tabIndicatorColor="#F4BC12"
+        app:tabIndicator="@drawable/gradient_effect"
+        app:tabTextColor="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#030F19"
+        android:id="@+id/tab_layout"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/viewpager" />
 
     <ListView
         android:id="@+id/listView"
