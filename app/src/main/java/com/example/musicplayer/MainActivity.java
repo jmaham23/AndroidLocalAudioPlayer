@@ -9,11 +9,16 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.ActivityManager;
 import android.os.Build.VERSION;
+import android.provider.MediaStore;
+import android.util.Log;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,10 +33,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //initialize view pager
         initVP();
+
+        if(!permsDenied()){
+            musicFilesPermanent = getAudio(this);
+        }
     }
 
     private static final int REQUEST_PERMS = 0; //request code
     private static final int PERMS_COUNT = 1;
+    ArrayList<Music> musicFilesPermanent;
     //permission to read files like music files from devices storage
     private static final String[] PERMS = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -89,6 +99,37 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public static ArrayList<Music> getAudio(Context context){
+        ArrayList<Music> audioList = new ArrayList<>();
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+
+        String[] projection = {MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.DATA};
+
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+
+        //read in music file information into Music instance
+        if(cursor != null){
+            while(cursor.moveToNext()){
+                String album = cursor.getString(0);
+                String title = cursor.getString(1);
+                String  duration = cursor.getString(2);
+                String artist = cursor.getString(3);
+                String data = cursor.getString(4);
+
+                Music music = new Music(title, album, artist, data, duration);
+                //storing audio files in log cat for testing
+                Log.e("Audio File Path:" + data, "Album: " + album);
+                audioList.add(music);
+            }
+            cursor.close();
+        }
+        return audioList;
+    }
     //check if permissions are denied
     private boolean permsDenied(){
         for(int i = 0; i< PERMS_COUNT ; i++){
@@ -99,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    //keep requesting permission until permission is granted
     public void onRequestPermissionsResult(int reqCode, String[] perms, int[] grantRes){
         super.onRequestPermissionsResult(reqCode, perms, grantRes);
 
@@ -117,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     //check if we have to request permissions
     @Override
     protected void onResume(){
+        musicFilesPermanent = getAudio(this);
         super.onResume();
         if(permsDenied()){
             requestPermissions(PERMS, REQUEST_PERMS);
