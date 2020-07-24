@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
 
+        //https://riptutorial.com/android/example/23916/fetch-audio-mp3-files-from-specific-folder-of-device-or-fetch-all-files
         //read in music file information into Music instance
         if(cursor != null){
             while(cursor.moveToNext()){
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Music music = new Music(title, album, artist, data, duration);
                 //storing audio files in log cat for testing
+                //audio files are stored in a virtual sd card within the emulator
                 Log.e("Audio File Path:" + data, "Album: " + album);
                 audioList.add(music);
             }
