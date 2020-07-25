@@ -9,11 +9,11 @@
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorGravity="center"
         app:tabIndicatorHeight="100dp"
-        app:tabIndicatorColor="#F4BC12"
+        app:tabIndicatorColor="@color/orange"
         app:tabIndicator="@drawable/gradient_effect"
         app:tabTextColor="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_weight="1"
         android:background="#030F19"
         android:id="@+id/tab_layout"/>
