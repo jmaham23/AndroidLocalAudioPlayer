@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.os.Build.VERSION;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -47,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_PERMS = 0; //request code
     private static final int PERMS_COUNT = 1;
-    ArrayList<Music> musicFilesPermanent;
+    private static ArrayList<Music> musicFilesPermanent;
+
+    public static ArrayList<Music> getMusic(){
+        return musicFilesPermanent;
+    }
+
     //permission to read files like music files from devices storage
     private static final String[] PERMS = {Manifest.permission.READ_EXTERNAL_STORAGE};
 

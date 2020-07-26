@@ -7,11 +7,22 @@
 
     <ImageView
         android:id="@+id/play_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/play48"/>
+
+    <ImageView
+        android:id="@+id/pause_icon"
+        android:layout_width="23dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="23dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/play_icon"
+        android:src="@drawable/pause48"/>
 
     <!--drawn after image view-->
 
@@ -24,7 +35,7 @@
         android:text="SongName"
         android:textStyle="bold"
         android:textColor="@color/orange"
-        android:layout_toRightOf="@id/play_icon"
+        android:layout_toRightOf="@id/pause_icon"
         android:textSize="27sp" />
 
     <TextView
