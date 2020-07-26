@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.app.Fragment;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.function.LongPredicate;
 
 //adapting music items for list view
 public class MusicAdapter extends BaseAdapter {
@@ -46,6 +48,7 @@ public class MusicAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+
 
     private class MyViewHolder{
         TextView songName;
@@ -99,15 +102,28 @@ public class MusicAdapter extends BaseAdapter {
                     .into(myViewHolder.albumArt);
         }
 
+
         //set up onclicklisteners to play music
         myViewHolder.playIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 mp = MediaPlayer.create(cnxt, Uri.parse(musicList.get(position).getPath()));
-                mp.start();
+                try {
+                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        //https://developer.android.com/guide/topics/media/mediaplayer
+                        //used to spawn a new thread for music buffering
+                        @Override
+                        public void onPrepared(MediaPlayer player) {
+                            player.start();
+                        }
+                    });
+                    mp.prepareAsync(); //need to buffer compressed song first
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
-
 
         /*
         myViewHolder.pauseIcon.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +135,7 @@ public class MusicAdapter extends BaseAdapter {
         */
         return convertView;
     }
+
 
     //get album art
     private byte[] getAlbumArt(String uri){
