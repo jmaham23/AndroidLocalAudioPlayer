@@ -1,6 +1,7 @@
 package com.example.musicplayer;
 
 import android.content.Context;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -50,6 +53,7 @@ public class MusicAdapter extends BaseAdapter {
 
         ImageView playIcon;
         ImageView pauseIcon;
+        ImageView albumArt;
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -70,6 +74,7 @@ public class MusicAdapter extends BaseAdapter {
             myViewHolder.artistName=(TextView)convertView.findViewById(R.id.artist);
             myViewHolder.playIcon=(ImageView) convertView.findViewById(R.id.play_icon);
             //myViewHolder.pauseIcon=(ImageView)convertView.findViewById(R.id.pause_icon);
+            myViewHolder.albumArt=(ImageView)convertView.findViewById(R.id.album_art);
 
             convertView.setTag(myViewHolder);
         }
@@ -77,6 +82,17 @@ public class MusicAdapter extends BaseAdapter {
 
         myViewHolder.songName.setText(music.getTitle());
         myViewHolder.artistName.setText(music.getArtist());
+        byte[] art = getAlbumArt(musicList.get(position).getPath());
+
+        if(art == null){
+            //default artwork
+        }
+        else{
+            //http://www.skholingua.com/android-basic/other-sdk-n-libs/glide
+            Glide.with(cnxt).asBitmap()
+                    .load(art)
+                    .into(myViewHolder.albumArt);
+        }
 
         //set up onclicklisteners to play music
         myViewHolder.playIcon.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +103,7 @@ public class MusicAdapter extends BaseAdapter {
             }
         });
 
+
         /*
         myViewHolder.pauseIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,5 +113,14 @@ public class MusicAdapter extends BaseAdapter {
         });
         */
         return convertView;
+    }
+
+    //get album art
+    private byte[] getAlbumArt(String uri){
+        MediaMetadataRetriever r = new MediaMetadataRetriever();
+        r.setDataSource(uri);
+        byte [] albumArtArray = r.getEmbeddedPicture();
+        r.release();
+        return albumArtArray;
     }
 }
