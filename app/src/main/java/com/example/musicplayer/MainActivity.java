@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         //https://riptutorial.com/android/example/23916/fetch-audio-mp3-files-from-specific-folder-of-device-or-fetch-all-files
         //read in music file information into Music instance
+        //function to load local music files into array
         if(cursor != null){
             while(cursor.moveToNext()){
                 String album = cursor.getString(0);
@@ -142,6 +143,15 @@ public class MainActivity extends AppCompatActivity {
             }
             cursor.close();
         }
+
+        //android emulator storage is limited
+        //so I will manually load in sample songs that come with the app
+        Music music = new Music("Nikes", "blond", "Frank Ocean", "R.music.Nikes", "5:14");
+        audioList.add(music);
+        Music ms = new Music("90210", "Rodeo", "Travis Scott", "R.music.90210", "5:39");
+        audioList.add(ms);
+        Music ms1 = new Music("Hallowed Be Thy Name", "The Number of the Beast", "Iron Maiden", "R.music.Hallowed Be Thy Name", "7:11");
+        audioList.add(ms1);
         return audioList;
     }
     //check if permissions are denied
