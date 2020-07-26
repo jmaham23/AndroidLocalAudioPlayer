@@ -1,6 +1,7 @@
 package com.example.musicplayer;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -58,11 +59,16 @@ public class MusicAdapter extends BaseAdapter {
         else{
             myViewHolder = new MyViewHolder();
 
+            LayoutInflater lI = (LayoutInflater) cnxt.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = lI.inflate(lyt, null);
+
+
             myViewHolder.songName=(TextView)convertView.findViewById(R.id.song_name);
             myViewHolder.artistName=(TextView)convertView.findViewById(R.id.artist);
             myViewHolder.playIcon=(ImageView) convertView.findViewById(R.id.play_icon);
             myViewHolder.pauseIcon=(ImageView)convertView.findViewById(R.id.pause_icon);
 
+            convertView.setTag(myViewHolder);
         }
         Music music = musicList.get(position);
 

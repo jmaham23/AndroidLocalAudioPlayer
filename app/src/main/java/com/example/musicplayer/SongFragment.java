@@ -35,7 +35,7 @@ public class SongFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_song, container, false);
         songs = (ListView) rootView.findViewById(R.id.songs);
         musicFiles = MainActivity.getMusic();
-        adapter = new MusicAdapter(getActivity(), R.layout.audio, musicFiles);
+        adapter = new MusicAdapter(getContext(), R.layout.audio, musicFiles);
         songs.setAdapter(adapter);
         return rootView;
     }
