@@ -1,6 +1,8 @@
 package com.example.musicplayer;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ public class MusicAdapter extends BaseAdapter {
     private int lyt;
     private Context cnxt;
     private ArrayList<Music> musicList;
+    private MediaPlayer mp;
 
     //constructor
     public MusicAdapter(Context cnxt, int lyt, ArrayList<Music> musicList){
@@ -49,7 +52,7 @@ public class MusicAdapter extends BaseAdapter {
         ImageView pauseIcon;
     }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final MyViewHolder myViewHolder;
 
         if(convertView != null){
@@ -74,6 +77,22 @@ public class MusicAdapter extends BaseAdapter {
 
         myViewHolder.songName.setText(music.getTitle());
         myViewHolder.artistName.setText(music.getArtist());
+
+        //set up onclicklisteners to play music
+        myViewHolder.playIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                mp = MediaPlayer.create(cnxt, Uri.parse(musicList.get(position).getPath()));
+                mp.start();
+            }
+        });
+
+        myViewHolder.pauseIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                mp.pause();
+            }
+        });
         return convertView;
     }
 }

@@ -146,12 +146,15 @@ public class MainActivity extends AppCompatActivity {
 
         //android emulator storage is limited
         //so I will manually load in sample songs that come with the app
+        /*
         Music music = new Music("Nikes", "blond", "Frank Ocean", "R.music.Nikes", "5:14");
         audioList.add(music);
         Music ms = new Music("90210", "Rodeo", "Travis Scott", "R.music.90210", "5:39");
         audioList.add(ms);
         Music ms1 = new Music("Hallowed Be Thy Name", "The Number of the Beast", "Iron Maiden", "R.music.Hallowed Be Thy Name", "7:11");
         audioList.add(ms1);
+        /*
+         */
         return audioList;
     }
     //check if permissions are denied
