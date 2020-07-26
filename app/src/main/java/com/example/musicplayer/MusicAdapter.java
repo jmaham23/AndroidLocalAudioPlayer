@@ -86,10 +86,15 @@ public class MusicAdapter extends BaseAdapter {
 
         if(art == null){
             //default artwork
+            Glide.with(cnxt).asBitmap()
+                    //embedded album art
+                    .load(R.drawable.default_album_art)
+                    .into(myViewHolder.albumArt);
         }
         else{
             //http://www.skholingua.com/android-basic/other-sdk-n-libs/glide
             Glide.with(cnxt).asBitmap()
+                    //embedded album art
                     .load(art)
                     .into(myViewHolder.albumArt);
         }
