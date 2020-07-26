@@ -33,7 +33,7 @@ public class SongFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_song, container, false);
-        songs = (ListView) findViewById(R.id.songs);
+        songs = (ListView) rootView.findViewById(R.id.songs);
         musicFiles = MainActivity.getMusic();
         adapter = new MusicAdapter(getActivity(), R.layout.audio, musicFiles);
         songs.setAdapter(adapter);
