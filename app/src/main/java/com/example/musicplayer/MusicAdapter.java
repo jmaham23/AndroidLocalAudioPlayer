@@ -69,7 +69,7 @@ public class MusicAdapter extends BaseAdapter {
             myViewHolder.songName=(TextView)convertView.findViewById(R.id.song_name);
             myViewHolder.artistName=(TextView)convertView.findViewById(R.id.artist);
             myViewHolder.playIcon=(ImageView) convertView.findViewById(R.id.play_icon);
-            myViewHolder.pauseIcon=(ImageView)convertView.findViewById(R.id.pause_icon);
+            //myViewHolder.pauseIcon=(ImageView)convertView.findViewById(R.id.pause_icon);
 
             convertView.setTag(myViewHolder);
         }
@@ -87,12 +87,14 @@ public class MusicAdapter extends BaseAdapter {
             }
         });
 
+        /*
         myViewHolder.pauseIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 mp.pause();
             }
         });
+        */
         return convertView;
     }
 }

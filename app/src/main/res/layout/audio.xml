@@ -3,26 +3,27 @@
     android:id="@+id/audio_strips"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#030F19">
 
     <ImageView
         android:id="@+id/play_icon"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
         android:layout_width="23dp"
         android:layout_height="23dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="9dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/play48"/>
+        android:src="@drawable/play48" />
 
     <ImageView
-        android:id="@+id/pause_icon"
+        android:id="@+id/album_art"
         android:layout_width="23dp"
         android:layout_marginTop="2dp"
         android:layout_height="23dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@id/play_icon"
-        android:src="@drawable/pause48"/>
+        android:src="@drawable/ic_launcher_background"/>
 
     <!--drawn after image view-->
 
@@ -35,21 +36,27 @@
         android:text="SongName"
         android:textStyle="bold"
         android:textColor="@color/orange"
-        android:layout_toRightOf="@id/pause_icon"
-        android:autoSizeMaxTextSize="27sp" />
+        android:layout_toRightOf="@id/album_art"
+        android:autoSizeMaxTextSize="27sp"
+        android:autoSizeMinTextSize="15sp"/>
 
     <TextView
         android:id="@+id/artist"
-        android:layout_width="wrap_content"
+        android:layout_width="226dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textStyle="italic"
+        android:layout_below="@+id/song_name"
+        android:layout_alignStart="@+id/song_name"
+        android:layout_alignEnd="@+id/song_name"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="-160dp"
+        android:layout_marginRight="30dp"
+        android:autoSizeMaxTextSize="27sp"
+        android:autoSizeMinTextSize="15sp"
         android:text="Artist"
-        android:textColor="#03A9F4"
-        android:layout_toRightOf="@id/song_name"
-        android:autoSizeMaxTextSize="27sp" />
+        android:textColor="#FFFFFF"
+        android:textStyle="italic" />
 
 
 </RelativeLayout>
