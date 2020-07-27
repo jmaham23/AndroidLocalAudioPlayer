@@ -1,6 +1,7 @@
 package com.example.musicplayer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -106,22 +107,10 @@ public class MusicAdapter extends BaseAdapter {
         //set up onclicklisteners to play music
         myViewHolder.playIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                mp = MediaPlayer.create(cnxt, Uri.parse(musicList.get(position).getPath()));
-                try {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        //https://developer.android.com/guide/topics/media/mediaplayer
-                        //used to spawn a new thread for music buffering
-                        @Override
-                        public void onPrepared(MediaPlayer player) {
-                            player.start();
-                        }
-                    });
-                    mp.prepareAsync(); //need to buffer compressed song first
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(cnxt, MusicPlayerActivity.class);
+                intent.putExtra("position", position);
+                cnxt.startActivity(intent);
             }
         });
 
