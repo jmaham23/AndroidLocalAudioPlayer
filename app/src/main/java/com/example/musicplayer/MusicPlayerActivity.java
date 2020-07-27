@@ -100,7 +100,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
             total = m + ":0" + s;
         }
         endTime.setText(total);
-
         if(likedList.contains(songList.get(pos))){
             like.setColorFilter(getApplicationContext().getResources().getColor(R.color.orange));
         }
@@ -279,7 +278,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    public void loadData(){
+    private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("music list", null);

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AlbumFragment extends Fragment {
 
     private ListView albums;
-    private MusicAdapter adapter;
+    private AlbumAdapter adapter;
     ArrayList<Music> musicFiles;
 
 
@@ -34,7 +34,7 @@ public class AlbumFragment extends Fragment {
         // Inflate the layout for this fragment
         albums = (ListView) v.findViewById(R.id.albumListview);
         musicFiles = MainActivity.getMusic();
-        adapter = new MusicAdapter(getContext(), R.layout.audio, musicFiles);
+        adapter = new AlbumAdapter(getContext(), R.layout.album_item, musicFiles);
         albums.setAdapter(adapter);
 
         return v;

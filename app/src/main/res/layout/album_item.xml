@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/album_strip"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#030F19">
+
+    <ImageView
+        android:id="@+id/drop_down"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+
+    <ImageView
+        android:id="@+id/album_art"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <!--drawn after image view-->
+
+    <TextView
+        android:id="@+id/album_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="AlbumName"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:layout_below="@id/album_art"
+        android:autoSizeMaxTextSize="27sp"
+        android:gravity="center_horizontal"
+        android:autoSizeMinTextSize="15sp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/album_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:autoSizeMaxTextSize="27sp"
+        android:autoSizeMinTextSize="15sp"
+        android:text="Artist"
+        android:gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic" />
+
+
+</RelativeLayout>
