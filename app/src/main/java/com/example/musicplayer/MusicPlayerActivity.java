@@ -114,7 +114,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
         });
 
-
+        //will automatically update the current song time
+        https://stackoverflow.com/questions/11140285/how-do-we-use-runonuithread-in-android
         MusicPlayerActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -140,10 +141,18 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
         });
         metaData(uri);
-        //settings views to appropriate meta data
+        //setting views to appropriate meta data
         songName.setText(songList.get(pos).getTitle());
         albumName.setText(songList.get(pos).getAlbum());
         artistName.setText(songList.get(pos).getArtist());
+
+        //item click listener for back button, just ends activity
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

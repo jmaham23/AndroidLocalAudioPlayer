@@ -14,17 +14,13 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.app.ActivityManager;
-import android.os.Build.VERSION;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.lang.Object;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         return musicFilesPermanent;
     }
 
+    public static ArrayList<Music> getLikedMusic(){
+        return musicFilesPermanent;
+    }
+
+
     //permission to read files like music files from devices storage
     private static final String[] PERMS = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //adding albums and songs
         vpa.addFrags(new SongFragment(), "Songs");
         vpa.addFrags(new AlbumFragment(), "Albums");
-        vpa.addFrags(new ArtistFragment(), "Artists");
+        vpa.addFrags(new LikeFragment(), "Liked");
 
         //set viewpager to one initialized
         vp.setAdapter(vpa);
@@ -143,18 +144,6 @@ public class MainActivity extends AppCompatActivity {
             }
             cursor.close();
         }
-
-        //android emulator storage is limited
-        //so I will manually load in sample songs that come with the app
-        /*
-        Music music = new Music("Nikes", "blond", "Frank Ocean", "R.music.Nikes", "5:14");
-        audioList.add(music);
-        Music ms = new Music("90210", "Rodeo", "Travis Scott", "R.music.90210", "5:39");
-        audioList.add(ms);
-        Music ms1 = new Music("Hallowed Be Thy Name", "The Number of the Beast", "Iron Maiden", "R.music.Hallowed Be Thy Name", "7:11");
-        audioList.add(ms1);
-        /*
-         */
         return audioList;
     }
     //check if permissions are denied
