@@ -125,14 +125,7 @@ public class MusicAdapter extends BaseAdapter {
             }
         });
 
-        /*
-        myViewHolder.pauseIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                mp.pause();
-            }
-        });
-        */
+
         return convertView;
     }
 
