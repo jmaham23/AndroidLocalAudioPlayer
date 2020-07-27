@@ -38,7 +38,11 @@ public class MusicAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return musicList.size();
+        if(!musicList.isEmpty())
+            return musicList.size();
+        else{
+            return 0;
+        }
     }
 
     @Override

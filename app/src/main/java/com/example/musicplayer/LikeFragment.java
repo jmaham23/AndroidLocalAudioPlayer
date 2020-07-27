@@ -28,7 +28,7 @@ public class LikeFragment extends Fragment {
 
     private ListView songs;
     private MusicAdapter adapter;
-    ArrayList<Music> musicFiles;
+    public static ArrayList<Music> musicFiles;
     public LikeFragment() {
         // Required empty public constructor
     }
@@ -39,7 +39,7 @@ public class LikeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_song, container, false);
         songs = (ListView) rootView.findViewById(R.id.songs);
-        musicFiles = MainActivity.getLikedMusic();
+        musicFiles = MusicPlayerActivity.likedList;
         adapter = new MusicAdapter(getContext(), R.layout.audio, musicFiles);
         songs.setAdapter(adapter);
         return rootView;
