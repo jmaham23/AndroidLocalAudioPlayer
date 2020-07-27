@@ -39,8 +39,7 @@ public class LikeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_song, container, false);
         songs = (ListView) rootView.findViewById(R.id.songs);
-        musicFiles = MusicPlayerActivity.likedList;
-        adapter = new MusicAdapter(getContext(), R.layout.audio, musicFiles);
+        adapter = new MusicAdapter(getContext(), R.layout.audio, MusicPlayerActivity.likedList);
         songs.setAdapter(adapter);
         return rootView;
     }
