@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         return audioList;
     }
     //check if permissions are denied
-    private boolean permsDenied(){
+    private boolean permsDenied() {
         for(int i = 0; i< PERMS_COUNT ; i++){
             if(checkSelfPermission(PERMS[i]) != PackageManager.PERMISSION_GRANTED)
                 return true;
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         musicFilesPermanent = getAudio(this);
         super.onResume();
-        if(permsDenied()){
+        if(permsDenied()) {
             requestPermissions(PERMS, REQUEST_PERMS);
             return;
         }
