@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.app.Fragment;
 
@@ -56,7 +57,6 @@ public class MusicAdapter extends BaseAdapter {
         TextView artistName;
 
         ImageView playIcon;
-        ImageView pauseIcon;
         ImageView albumArt;
     }
     @Override
@@ -77,7 +77,6 @@ public class MusicAdapter extends BaseAdapter {
             myViewHolder.songName=(TextView)convertView.findViewById(R.id.song_name);
             myViewHolder.artistName=(TextView)convertView.findViewById(R.id.artist);
             myViewHolder.playIcon=(ImageView) convertView.findViewById(R.id.play_icon);
-            //myViewHolder.pauseIcon=(ImageView)convertView.findViewById(R.id.pause_icon);
             myViewHolder.albumArt=(ImageView)convertView.findViewById(R.id.album_art);
 
             convertView.setTag(myViewHolder);
