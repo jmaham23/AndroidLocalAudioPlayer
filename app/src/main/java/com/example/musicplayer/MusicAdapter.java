@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.function.LongPredicate;
 
 //adapting music items for list view
@@ -29,11 +31,18 @@ public class MusicAdapter extends BaseAdapter {
     private ArrayList<Music> musicList;
     private MediaPlayer mp;
 
+
     //constructor
     public MusicAdapter(Context cnxt, int lyt, ArrayList<Music> musicList){
         this.cnxt = cnxt;
         this.lyt = lyt;
         this.musicList = musicList;
+        this.musicList.sort(new Comparator<Music>() {
+            @Override
+            public int compare(Music o1, Music o2) {
+                return o1.getTitle().compareToIgnoreCase(o2.getTitle());
+            }
+        });
     }
 
     @Override
