@@ -108,8 +108,8 @@ public class AlbumAdapter extends BaseAdapter {
         myViewHolder.dropDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(cnxt, MusicPlayerActivity.class);
-                intent.putExtra("position", position);
+                Intent intent = new Intent(cnxt, AlbumViewActivity.class);
+                intent.putExtra("songs in album", albumList.get(position).getAlbum());
                 cnxt.startActivity(intent);
             }
         });
