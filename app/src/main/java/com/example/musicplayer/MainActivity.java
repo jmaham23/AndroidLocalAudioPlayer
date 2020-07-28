@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_PERMS = 0; //request code
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +42,12 @@ public class MainActivity extends AppCompatActivity {
         if(!permsDenied()){
             musicFilesPermanent = getAudio(this);
             initVP();
+        } else {
+            requestPermissions(PERMS, REQUEST_PERMS);
         }
     }
 
-    private static final int REQUEST_PERMS = 0; //request code
+//    private static final int REQUEST_PERMS = 0; //request code
     private static final int PERMS_COUNT = 1;
     private static ArrayList<Music> musicFilesPermanent;
 
