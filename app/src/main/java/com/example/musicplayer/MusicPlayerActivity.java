@@ -20,6 +20,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MusicPlayerActivity extends AppCompatActivity {
     private Handler h = new Handler();
@@ -73,6 +75,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         pos = getIntent().getIntExtra("position", -1);
         songList = MainActivity.getMusic();
+
         //https://stackoverflow.com/questions/51837927/sending-music-file-from-one-application-to-another
         if (songList != null) {
             playPause.setImageResource(R.drawable.ic_pause);
@@ -186,6 +189,13 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     }
 
+    public void checkPos() {
+        if(pos < 0) {
+            pos = songList.size() - 1;
+        } else if(pos == songList.size() || pos > songList.size()) {
+            pos = 0;
+        }
+    }
 
     private void metaData(Uri uri){
         MediaMetadataRetriever r = new MediaMetadataRetriever();
@@ -216,14 +226,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     private void skipPrevThreadBtn() {
-
-    }
-
-    private void skipNextThreadBtn() {
-        next.setOnClickListener(new View.OnClickListener() {
+        prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos += 1;
+                pos -= 1;
+
                 uri = Uri.parse(songList.get(pos).getPath());
 
                 mp.stop();
@@ -233,16 +240,24 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
                 seek.setMax(mp.getDuration() / 1000);
 
-                MusicPlayerActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mp != null) {
-                            int current = mp.getCurrentPosition() / 1000;
-                            seek.setProgress(current);
-                        }
-                        h.postDelayed(this, 1000);
-                    }
-                });
+            }
+        });
+    }
+
+    private void skipNextThreadBtn() {
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos += 1;
+
+                uri = Uri.parse(songList.get(pos).getPath());
+
+                mp.stop();
+                mp.release();
+                mp = MediaPlayer.create(getApplicationContext(), uri);
+                mp.start();
+
+                seek.setMax(mp.getDuration() / 1000);
             }
         });
     }

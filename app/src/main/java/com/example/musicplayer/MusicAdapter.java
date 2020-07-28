@@ -36,13 +36,17 @@ public class MusicAdapter extends BaseAdapter {
     public MusicAdapter(Context cnxt, int lyt, ArrayList<Music> musicList){
         this.cnxt = cnxt;
         this.lyt = lyt;
-        this.musicList = musicList;
-        this.musicList.sort(new Comparator<Music>() {
+        this.musicList = sortSongTitles(musicList);
+    }
+
+    public ArrayList<Music> sortSongTitles(ArrayList<Music> list) {
+        list.sort(new Comparator<Music>() {
             @Override
             public int compare(Music o1, Music o2) {
                 return o1.getTitle().compareToIgnoreCase(o2.getTitle());
             }
         });
+        return list;
     }
 
     @Override
