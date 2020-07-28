@@ -45,7 +45,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     TextView artistName;
     TextView currentTime;
     TextView endTime;
-    int pos = -1;
+    static int pos = -1;
 
 
     @Override
@@ -145,7 +145,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         });
 
         //will automatically update the current song time
-        https://stackoverflow.com/questions/11140285/how-do-we-use-runonuithread-in-android
+        // https://stackoverflow.com/questions/11140285/how-do-we-use-runonuithread-in-android
         MusicPlayerActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -183,6 +183,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
 
@@ -215,9 +216,35 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     private void skipPrevThreadBtn() {
+
     }
 
     private void skipNextThreadBtn() {
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos += 1;
+                uri = Uri.parse(songList.get(pos).getPath());
+
+                mp.stop();
+                mp.release();
+                mp = MediaPlayer.create(getApplicationContext(), uri);
+                mp.start();
+
+                seek.setMax(mp.getDuration() / 1000);
+
+                MusicPlayerActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mp != null) {
+                            int current = mp.getCurrentPosition() / 1000;
+                            seek.setProgress(current);
+                        }
+                        h.postDelayed(this, 1000);
+                    }
+                });
+            }
+        });
     }
 
     private void playPauseThreadBtn() {
